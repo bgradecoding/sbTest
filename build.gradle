@@ -2,6 +2,27 @@
  * Gradle binary plugin
  * https://docs.gradle.org/current/userguide/plugins.html
  */
+ buildscript {
+
+    ext {
+        springBootVersion = '2.4.1'
+        swaggerVersion = '3.0.0'
+    }
+
+    repositories {
+        mavenCentral()
+        maven { url 'https://repo.spring.io/snapshot' }
+        maven { url 'https://repo.spring.io/milestone' }
+    }
+
+    dependencies {
+        classpath("org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}")
+        classpath("io.spring.gradle:dependency-management-plugin:1.0.11.RELEASE")
+    }
+
+}
+ 
+ 
 plugins {
     /**
      * 2.4.0 부터 RELEASE 제거됨
@@ -21,10 +42,9 @@ Project name: ${project.name}
 
 
 
-apply plugin: "java"
-apply plugin: "eclipse"
-apply plugin: "idea"
-apply plugin: "io.spring.dependency-management"
+apply plugin: 'java'
+apply plugin: 'org.springframework.boot'
+apply plugin: 'io.spring.dependency-management'
 
 version = "2021.0"
 
@@ -56,15 +76,6 @@ configurations {
  *
  * @see https://docs.spring.io/spring-boot/docs/current/gradle-plugin/reference/html/#managing-dependencies-using-in-isolation
  */
-dependencyManagement {
-//	dependencies {
-//		implementation("org.springframework.boot:spring-boot-starter-web:2.0.3.RELEASE")
-//	}
-//
-//    imports {
-//        mavenBom "org.springframework.boot:spring-boot-starter-parent:2.0.1.RELEASE"
-//    }
-}
 
 /**
  * 다음과 같이 선언하면 spring-boot-starter-dependencies 에서 정의한 버전을 덮어쓴다.
